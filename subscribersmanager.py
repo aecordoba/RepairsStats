@@ -83,3 +83,9 @@ class Repair:
 
     def __str__(self):
         return f'Repair number: {self._number} \tOpen: {self._open_date} \tClosed: {self._close_date}'
+
+    def get_complete_time(self):
+        complete_time = None
+        if self._close_date is not None:
+            complete_time = (self._close_date - self._open_date).days
+        return complete_time

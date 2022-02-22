@@ -3,8 +3,9 @@ from datetime import timedelta
 import csv
 
 
-def time_stats():
-    print('Not implemented')
+def time_stats(subscribers):
+    for subscriber in subscribers:
+        print(f'{subscriber.repairs[0].get_complete_time()}')
 
 
 def recurrence(subscribers):
@@ -22,7 +23,7 @@ def recurrence(subscribers):
                     repairs.append((current_repair, next_repair))
         if len(repairs) > 0:
             stats[subscriber] = repairs
-        write_recurrence_file(stats)
+    write_recurrence_file(stats)
 
 
 def get_integer(message):
@@ -44,3 +45,4 @@ def write_recurrence_file(stats):
             for repair in repairs:
                 writer.writerow([None, repair[0].number, repair[0].open_date, repair[0].close_date])
                 writer.writerow([None, repair[1].number, repair[1].open_date, repair[1].close_date])
+    print('recurrence.csv file saved.')
