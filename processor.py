@@ -1,15 +1,21 @@
 # processor.py
 from datetime import timedelta
 import csv
+import pandas as pd
 
 
 def time_stats(subscribers):
+    complete_times = []
     for subscriber in subscribers:
-        print(f'{subscriber.repairs[0].get_complete_time()}')
+        for repair in subscriber.repairs:
+            complete_times.append(repair.get_complete_time())
+    times = pd.Series(data=complete_times)
+    print_stats(times.describe())
 
 
 def recurrence(subscribers):
     stats = {}
+    count = 0
     recurrence_period = get_integer('Maximum period between claims')
     for subscriber in subscribers:
         repairs = []
@@ -21,9 +27,11 @@ def recurrence(subscribers):
                 next_open_date = next_repair.open_date
                 if current_close_date and (current_close_date + timedelta(days=recurrence_period)) > next_open_date:
                     repairs.append((current_repair, next_repair))
+                    count += 1
         if len(repairs) > 0:
             stats[subscriber] = repairs
     write_recurrence_file(stats)
+    print_recurrence(count)
 
 
 def get_integer(message):
@@ -45,4 +53,18 @@ def write_recurrence_file(stats):
             for repair in repairs:
                 writer.writerow([None, repair[0].number, repair[0].open_date, repair[0].close_date])
                 writer.writerow([None, repair[1].number, repair[1].open_date, repair[1].close_date])
-    print('recurrence.csv file saved.')
+
+
+def print_stats(message):
+    print('\n', '-' * 35, sep='')
+    print('===== REPAIR TIMES STATISTICS =====')
+    print(message)
+    print('-' * 35)
+
+
+def print_recurrence(count):
+    print('\n', '-' * 32, sep='')
+    print('===== RECURRENCE OF CLAIMS =====')
+    print(f'It were fond {count} recurrence of clains.')
+    print('(recurrence.csv file was saved.)')
+    print('-' * 32)

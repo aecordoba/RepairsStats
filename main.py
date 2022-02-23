@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # main.py
 """ Derqui repairs statistics app. """
 from datetime import datetime
@@ -27,7 +28,7 @@ def main():
 def get_menu_option():
     option = -1
     while option not in menu_options.keys():
-        print('====== MENU OPTIONS ======\n')
+        print('\n====== MENU OPTIONS ======\n')
         for index, value in menu_options.items():
             print(f'{index}- {value[0]}')
         try:
