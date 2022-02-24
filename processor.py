@@ -9,6 +9,7 @@ def time_stats(subscribers):
     for subscriber in subscribers:
         for repair in subscriber.repairs:
             complete_times.append(repair.get_complete_time())
+    pd.set_option('precision', 2)
     times = pd.Series(data=complete_times)
     print_stats(times.describe())
 
