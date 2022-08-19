@@ -3,12 +3,12 @@
 """ Derqui repairs statistics app. """
 from datetime import datetime
 from subscribersmanager import SubscribersManager
-from processor import time_stats, repairs_stats, recurrence, claims_per_subscriber
+from processor import time_stats, claims_stats, recurrence, claims_per_subscriber
 
 
 menu_options = {
     1: ('Repair times statistics', time_stats),
-    2: ('Repairs quantity statistics', repairs_stats),
+    2: ('Claims quantity statistics', claims_stats),
     3: ('Recurrence of claims', recurrence),
     4: ('Claims per subscribers', claims_per_subscriber),
     0: ('Exit', None)

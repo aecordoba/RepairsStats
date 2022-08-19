@@ -14,13 +14,13 @@ def time_stats(subscribers):
 	print_stats('REPAIR TIMES STATISTICS (days)', times_series.describe())
 
 
-def repairs_stats(subscribers):
+def claims_stats(subscribers):
 	repairs = []
 	for subscriber in subscribers:
 		repairs.append(len(subscriber.repairs))
 	pd.set_option('precision', 2)
 	repairs_series = pd.Series(data=repairs)
-	print_stats('REPAIRS QUANTITY STATISTICS', repairs_series.describe())
+	print_stats('CLAIMS QUANTITY STATISTICS', repairs_series.describe())
 
 
 def recurrence(subscribers):
@@ -96,6 +96,6 @@ def write_recurrence_file(stats):
 def print_recurrence(count):
 	print('\n', '-' * 32, sep='')
 	print('===== RECURRENCE OF CLAIMS =====')
-	print(f'It were fond {count} recurrence of claims.')
+	print(f'It were found {count} recurrence of claims.')
 	print('(recurrence.csv file was saved.)')
 	print('-' * 32)
